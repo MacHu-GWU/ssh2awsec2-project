@@ -18,6 +18,9 @@
 .. image:: https://img.shields.io/pypi/pyversions/ssh2awsec2.svg
     :target: https://pypi.python.org/pypi/ssh2awsec2
 
+.. image:: https://img.shields.io/badge/Release_History!--None.svg?style=social
+    :target: https://github.com/MacHu-GWU/ssh2awsec2-project/release-history.rst
+
 .. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
     :target: https://github.com/MacHu-GWU/ssh2awsec2-project
 
@@ -51,8 +54,7 @@
 
 Welcome to ``ssh2awsec2`` Documentation
 ==============================================================================
-
-Documentation for ``ssh2awsec2``.
+Release as a placeholder on PyPI.
 
 
 .. _install:
