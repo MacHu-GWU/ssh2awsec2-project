@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from pathlib_mate import Path
+from pathlib import Path
 
-dir_here = Path.dir_here(__file__)
-PACKAGE_NAME = dir_here.basename
+dir_here = Path(__file__).absolute().parent
+PACKAGE_NAME = dir_here.name
 
-dir_project_root = Path.dir_here(__file__).parent
+dir_project_root = dir_here.parent
 
 # ------------------------------------------------------------------------------
 # Virtual Environment Related
@@ -20,3 +20,12 @@ bin_pytest = dir_venv_bin / "pytest"
 dir_htmlcov = dir_project_root / "htmlcov"
 path_cov_index_html = dir_htmlcov / "index.html"
 dir_unit_test = dir_project_root / "tests"
+
+# ------------------------------------------------------------------------------
+# CLI related
+# ------------------------------------------------------------------------------
+dir_home = Path.home()
+dir_ssh2awsec2 = Path.home() / ".ssh2awsec2"
+dir_ssh2awsec2.mkdir(exist_ok=True, parents=True)
+path_config = dir_ssh2awsec2 / "config.json"
+dir_cache = dir_ssh2awsec2 / ".cache"
