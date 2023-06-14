@@ -57,13 +57,11 @@ class PemFileStore:
 
         if account_id is not None:
             path_pem_file = self.get_pem_file_path(account_id, region, key_name)
-            print("asdfadf", path_pem_file)
             if path_pem_file.exists():
                 return path_pem_file
 
         if account_alias is not None:
             path_pem_file = self.get_pem_file_path(account_alias, region, key_name)
-            print("asdfadf", path_pem_file)
             if path_pem_file.exists():
                 return path_pem_file
 

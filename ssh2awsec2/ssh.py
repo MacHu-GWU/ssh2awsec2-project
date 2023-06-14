@@ -25,9 +25,6 @@ def get_ssh_cmd(
     path_pem_file: Path,
     username: str,
     public_ip: str,
-) -> str:
-    return "ssh -i {ec2_pem} {username}@{public_ip}".format(
-        ec2_pem=path_pem_file,
-        username=username,
-        public_ip=public_ip,
-    )
+) -> T.List[str]:
+    args = ["ssh", "-i", f"{path_pem_file}", f"{username}@{public_ip}"]
+    return args
