@@ -10,13 +10,14 @@ Reference:
 - Amazon EC2 key pairs and Linux instances: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 """
 
+import typing as T
 import dataclasses
 from pathlib import Path
 
 
 @dataclasses.dataclass
 class PemFileStore:
-    dir_root: Path
+    dir_root: Path = dataclasses.field(default=Path.home().joinpath("ec2-pem"))
 
     def get_pem_file_path(
         self,
@@ -34,3 +35,38 @@ class PemFileStore:
         else:
             filename = f"{key_name}.pem"
         return self.dir_root.joinpath(account_id_or_alias, region, filename)
+
+    def locate_pem_file(
+        self,
+        region: str,
+        key_name: str,
+        account_id: T.Optional[str],
+        account_alias: T.Optional[str],
+    ):
+        """
+        Try to locate the EC2 pem file at
+        ${HOME}/${account_id_or_alias}/${region}/${key_name}.pem
+
+        :param region:
+        :param key_name:
+        :param account_id:
+        :param account_alias:
+        :return:
+        """
+        if account_id is None and account_alias is None:  # pragma: no cover
+            raise ValueError("account_id and account_alias cannot be both None")
+        elif account_id is not None:
+            path_pem_file = self.get_pem_file_path(account_id, region, key_name)
+            if path_pem_file.exists():
+                return path_pem_file
+        elif account_alias is not None:
+            path_pem_file = self.get_pem_file_path(account_alias, region, key_name)
+            if path_pem_file.exists():
+                return path_pem_file
+        else:  # pragma: no cover
+            raise NotImplementedError
+        raise FileNotFoundError(
+            f"Cannot find pem file at {path_pem_file}, "
+            "please put your ec2 pem file at "
+            "${HOME}/${account_id_or_alias}/${region}/${key_name}.pem"
+        )
