@@ -15,7 +15,7 @@ Release and Version History
 **Miscellaneous**
 
 
-0.1.1 (2023-06-13)
+0.0.1 (2023-06-13)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 - First release
+- Release as a placeholder on PyPI.
