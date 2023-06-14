@@ -19,7 +19,7 @@
     :target: https://pypi.python.org/pypi/ssh2awsec2
 
 .. image:: https://img.shields.io/badge/Release_History!--None.svg?style=social
-    :target: https://github.com/MacHu-GWU/ssh2awsec2-project/release-history.rst
+    :target: https://github.com/MacHu-GWU/ssh2awsec2-project/blob/main/release-history.rst
 
 .. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
     :target: https://github.com/MacHu-GWU/ssh2awsec2-project
