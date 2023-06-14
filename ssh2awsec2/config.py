@@ -11,6 +11,7 @@ from .paths import path_config
 @dataclasses.dataclass
 class Config:
     aws_profile: T.Optional[str] = dataclasses.field(default=None)
+    aws_region: T.Optional[str] = dataclasses.field(default=None)
 
     @classmethod
     def read(cls) -> "Config":
