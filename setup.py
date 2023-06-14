@@ -182,6 +182,11 @@ if __name__ == "__main__":
         license=LICENSE,
         install_requires=REQUIRES,
         extras_require=EXTRA_REQUIRE,
+        entry_points={
+            "console_scripts": [
+                "sshec2=ssh2awsec2.cli:main",
+            ],
+        },
     )
 
 """
