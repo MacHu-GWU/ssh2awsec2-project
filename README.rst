@@ -26,14 +26,10 @@
 
 ------
 
-
 .. image:: https://img.shields.io/badge/Link-Document-blue.svg
     :target: https://ssh2awsec2.readthedocs.io/en/latest/
 
 .. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://ssh2awsec2.readthedocs.io/en/latest/py-modindex.html
-
-.. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
     :target: https://ssh2awsec2.readthedocs.io/en/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
