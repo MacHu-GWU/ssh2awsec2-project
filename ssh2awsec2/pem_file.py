@@ -51,20 +51,22 @@ class PemFileStore:
         :param key_name:
         :param account_id:
         :param account_alias:
-        :return:
         """
         if account_id is None and account_alias is None:  # pragma: no cover
             raise ValueError("account_id and account_alias cannot be both None")
-        elif account_id is not None:
+
+        if account_id is not None:
             path_pem_file = self.get_pem_file_path(account_id, region, key_name)
+            print("asdfadf", path_pem_file)
             if path_pem_file.exists():
                 return path_pem_file
-        elif account_alias is not None:
+
+        if account_alias is not None:
             path_pem_file = self.get_pem_file_path(account_alias, region, key_name)
+            print("asdfadf", path_pem_file)
             if path_pem_file.exists():
                 return path_pem_file
-        else:  # pragma: no cover
-            raise NotImplementedError
+
         raise FileNotFoundError(
             f"Cannot find pem file at {path_pem_file}, "
             "please put your ec2 pem file at "
