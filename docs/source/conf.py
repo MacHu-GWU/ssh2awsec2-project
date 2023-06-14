@@ -45,9 +45,8 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinxcontrib.jinja',
+    'sphinx_jinja',
     'sphinx_copybutton',
-    'sphinx_inline_tabs',
     'docfly.directives',
 ]
 
@@ -82,7 +81,7 @@ release = package.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -238,9 +237,10 @@ docfly.ApiReferenceDoc(
     conf_file=__file__,
     package_name=package_name,
     ignored_package=[
-        "%s._version" % package_name,
-        "%s.pkg" % package_name,
         "%s.docs" % package_name,
         "%s.tests" % package_name,
+        "%s.vendor" % package_name,
+        "%s._version" % package_name,
+        "%s.paths" % package_name,
     ]
 ).fly()
