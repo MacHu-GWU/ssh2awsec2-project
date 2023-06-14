@@ -1,6 +1,6 @@
 
 .. image:: https://readthedocs.org/projects/ssh2awsec2/badge/?version=latest
-    :target: https://ssh2awsec2.readthedocs.io/index.html
+    :target: https://ssh2awsec2.readthedocs.io/en/latest/
     :alt: Documentation Status
 
 .. image:: https://github.com/MacHu-GWU/ssh2awsec2-project/workflows/CI/badge.svg
@@ -28,13 +28,13 @@
 
 
 .. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: https://ssh2awsec2.readthedocs.io/index.html
+    :target: https://ssh2awsec2.readthedocs.io/en/latest/
 
 .. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://ssh2awsec2.readthedocs.io/py-modindex.html
+    :target: https://ssh2awsec2.readthedocs.io/en/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-    :target: https://ssh2awsec2.readthedocs.io/py-modindex.html
+    :target: https://ssh2awsec2.readthedocs.io/en/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
     :target: `install`_
