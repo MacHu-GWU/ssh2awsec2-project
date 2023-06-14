@@ -184,7 +184,7 @@ if __name__ == "__main__":
         extras_require=EXTRA_REQUIRE,
         entry_points={
             "console_scripts": [
-                "sshec2=ssh2awsec2.cli:main",
+                "sshec2=ssh2awsec2.cli.main:run",
             ],
         },
     )

@@ -13,11 +13,12 @@ Reference:
 import typing as T
 import dataclasses
 from pathlib import Path
+from .paths import dir_pem_files
 
 
 @dataclasses.dataclass
 class PemFileStore:
-    dir_root: Path = dataclasses.field(default=Path.home().joinpath("ec2-pem"))
+    dir_pem_files: Path = dataclasses.field(default=dir_pem_files)
 
     def get_pem_file_path(
         self,
@@ -34,7 +35,7 @@ class PemFileStore:
             filename = key_name
         else:
             filename = f"{key_name}.pem"
-        return self.dir_root.joinpath(account_id_or_alias, region, filename)
+        return self.dir_pem_files.joinpath(account_id_or_alias, region, filename)
 
     def locate_pem_file(
         self,

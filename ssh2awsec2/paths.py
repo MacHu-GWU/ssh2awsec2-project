@@ -29,3 +29,4 @@ dir_ssh2awsec2 = Path.home() / ".ssh2awsec2"
 dir_ssh2awsec2.mkdir(exist_ok=True, parents=True)
 path_config = dir_ssh2awsec2 / "config.json"
 dir_cache = dir_ssh2awsec2 / ".cache"
+dir_pem_files = dir_home.joinpath("ec2-pem")

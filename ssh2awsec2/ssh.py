@@ -5,26 +5,4 @@
 """
 
 import typing as T
-import enum
 from pathlib import Path
-
-
-class AmiTypeEnum(str, enum.Enum):
-    AmazonLinux = "ec2-user"
-    CentOS = "ec2-user"
-    Debian = "admin"
-    Fedora = "ec2-user"
-    RHEL = "ec2-user"
-    SUSE = "ec2-user"
-    Ubuntu = "ubuntu"
-    Oracle = "ec2-user"
-    Bitnami = "bitnami"
-
-
-def get_ssh_cmd(
-    path_pem_file: Path,
-    username: str,
-    public_ip: str,
-) -> T.List[str]:
-    args = ["ssh", "-i", f"{path_pem_file}", f"{username}@{public_ip}"]
-    return args

@@ -76,7 +76,8 @@ class ListChoices:
         :param merge_selected: if True, then the recently selected choices
             will be merged into the choices. If False, then only the given
             choices will prompt.
-        :return:
+
+        :return: the selected choice id and value
         """
         # prepare id to value and value to id mapper
         mapper = choices
