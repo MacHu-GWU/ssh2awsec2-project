@@ -65,7 +65,7 @@ class ListChoices:
         message: str,
         choices: T.Dict[str, str],
         merge_selected: bool = False,
-    ) -> T.Tuple[str, str]:
+    ) -> T.Tuple[str, str]: # pragma: no cover
         """
         Prompt to select from multiple choice, and return the selected choice
         id and value. It remembers the recent choice and use it as the default

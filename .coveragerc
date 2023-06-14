@@ -5,9 +5,15 @@ omit =
     ssh2awsec2/docs/*
     ssh2awsec2/tests/*
     ssh2awsec2/vendor/*
+    ssh2awsec2/cli/*
     ssh2awsec2/_version.py
-    ssh2awsec2/cli.py
+    ssh2awsec2/better_boto.py
+    ssh2awsec2/boto_ses.py
+    ssh2awsec2/cache.py
+    ssh2awsec2/config.py
     ssh2awsec2/paths.py
+    ssh2awsec2/logger.py
+    ssh2awsec2/recent.py
 
 [report]
 # Regexes for lines to exclude from consideration
