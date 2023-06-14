@@ -63,7 +63,7 @@ class PemFileStore:
 
         if account_alias is not None:
             path_pem_file = self.get_pem_file_path(account_alias, region, key_name)
-            if path_pem_file.exists():
+            if path_pem_file.exists():  # pragma: no cover
                 return path_pem_file
 
         raise FileNotFoundError(

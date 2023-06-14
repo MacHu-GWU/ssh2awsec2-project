@@ -4,7 +4,12 @@ from ssh2awsec2 import api
 
 
 def test():
-    _ = api
+    _ = api.get_account_id
+    _ = api.get_account_alias
+    _ = api.get_boto_ses
+    _ = api.Config
+    _ = api.PemFileStore
+    _ = api.ListChoices
 
 
 if __name__ == "__main__":
