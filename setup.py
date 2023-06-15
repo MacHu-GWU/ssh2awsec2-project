@@ -30,8 +30,7 @@ if __name__ == "__main__":
     try:
         SHORT_DESCRIPTION = package.__short_description__  # GitHub Short Description
     except:
-        print(
-            "'__short_description__' not found in '%s.__init__.py'!" % PKG_NAME)
+        print("'__short_description__' not found in '%s.__init__.py'!" % PKG_NAME)
         SHORT_DESCRIPTION = "No short description!"
 
     # Long description will be the body of content on PyPI page
@@ -65,15 +64,17 @@ if __name__ == "__main__":
         MAINTAINER_EMAIL = None
 
     PACKAGES, INCLUDE_PACKAGE_DATA, PACKAGE_DATA, PY_MODULES = (
-        None, None, None, None,
+        None,
+        None,
+        None,
+        None,
     )
 
     # It's a directory style package
     if os.path.exists(__file__[:-8] + PKG_NAME):
         # Include all sub packages in package directory
         PACKAGES = [PKG_NAME] + [
-            "%s.%s" % (PKG_NAME, i)
-            for i in find_packages(PKG_NAME)
+            "%s.%s" % (PKG_NAME, i) for i in find_packages(PKG_NAME)
         ]
 
         # Include everything in package directory
@@ -84,7 +85,9 @@ if __name__ == "__main__":
 
     # It's a single script style package
     elif os.path.exists(__file__[:-8] + PKG_NAME + ".py"):
-        PY_MODULES = [PKG_NAME, ]
+        PY_MODULES = [
+            PKG_NAME,
+        ]
 
     # The project directory name is the GitHub repository name
     repository_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
@@ -97,7 +100,8 @@ if __name__ == "__main__":
 
     # Source code download url
     DOWNLOAD_URL = "https://pypi.python.org/pypi/{0}/{1}#downloads".format(
-        PKG_NAME, VERSION)
+        PKG_NAME, VERSION
+    )
 
     try:
         LICENSE = package.__license__
@@ -138,11 +142,10 @@ if __name__ == "__main__":
         for line in f.read().decode("utf-8").split("\n"):
             line = line.strip()
             if "#" in line:
-                line = line[:line.find("#")].strip()
+                line = line[: line.find("#")].strip()
             if line:
                 requires.append(line)
         return requires
-
 
     try:
         REQUIRES = read_requirements_file("requirements.txt")
@@ -184,6 +187,7 @@ if __name__ == "__main__":
         extras_require=EXTRA_REQUIRE,
         entry_points={
             "console_scripts": [
+                "ssh2awsec2=ssh2awsec2.cli.main:run",
                 "sshec2=ssh2awsec2.cli.main:run",
             ],
         },
