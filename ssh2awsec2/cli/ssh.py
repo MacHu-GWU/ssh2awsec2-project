@@ -105,9 +105,6 @@ def get_ec2_inst_choice(ec2_inst: Ec2Instance) -> str:
     return f"id = {inst_id}, name = {name!r}, public ip = {pub_ip}"
 
 
-SSH_CMD_CACHE_EXPIRE = 24 * 60 * 60  # 1 day
-
-
 def get_ssh_cmd(
     path_pem_file: Path,
     username: str,
@@ -167,8 +164,11 @@ def ssh(
     for ec2_inst in ec2_inst_list:
         choices[ec2_inst.id] = get_ec2_inst_choice(ec2_inst)
 
-    list_choices = ListChoices(key=f"SSH-{aws_account_id}-{aws_region}")
-    logger.info("What EC2 you want to SSh to?")
+    list_choices = ListChoices(
+        key=f"SSH-{aws_account_id}-{aws_region}",
+        expire=config.recent_cache_expire,
+    )
+    logger.info("Which EC2 you want to SSH to?")
     logger.info("⬆ ⬇ Move your cursor up and down and press Enter to select.")
     inst_id, choice = list_choices.ask(
         message="Current selection",
@@ -188,7 +188,7 @@ def ssh(
             try:
                 subprocess.run(ssh_cmd, shell=True)
                 # if cached ssh command works, update cache
-                cache.set(cache_key, ssh_cmd, expire=SSH_CMD_CACHE_EXPIRE)
+                cache.set(cache_key, ssh_cmd, expire=config.ssh_cmd_cache_expire)
                 return
             except Exception as e:
                 # if cached ssh command doesn't work, delete cache and continue
@@ -221,7 +221,10 @@ def ssh(
         logger.info(f"✅ found os type {os_type.value} and potential usernames: {users}")
     except CannotDetectOSTypeError:
         logger.info(f"cannot automatically detect OS username")
-        list_choices = ListChoices(key=f"OS-USERNAME-{ec2_inst.id}")
+        list_choices = ListChoices(
+            key=f"OS-USERNAME-{ec2_inst.id}",
+            expire=config.recent_cache_expire,
+        )
         _choices = [
             "ec2-user",
             "ubuntu",
@@ -254,7 +257,7 @@ def ssh(
         ssh_cmd = " ".join(ssh_args)
         logger.info(f"Run ssh command: {ssh_cmd}")
         logger.info("Precess Ctrl + D to exit SSH session")
-        cache.set(cache_key, ssh_cmd, expire=SSH_CMD_CACHE_EXPIRE)
+        cache.set(cache_key, ssh_cmd, expire=config.ssh_cmd_cache_expire)
         try:
             subprocess.run(ssh_cmd, shell=True)
         except Exception as e:

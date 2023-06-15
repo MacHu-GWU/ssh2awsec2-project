@@ -13,6 +13,7 @@ from collections import deque
 import inquirer
 
 from .cache import cache
+from .config import RECENT_CACHE_EXPIRE
 
 
 @dataclasses.dataclass
@@ -25,8 +26,8 @@ class ListChoices:
     """
 
     key: str = dataclasses.field()
-    expire: int = dataclasses.field(default=3600)
-    max_item: int = dataclasses.field(default=10)
+    expire: int = dataclasses.field(default=RECENT_CACHE_EXPIRE)
+    max_item: int = dataclasses.field(default=20)
 
     def save_selected_choice(
         self,
@@ -65,7 +66,7 @@ class ListChoices:
         message: str,
         choices: T.Dict[str, str],
         merge_selected: bool = False,
-    ) -> T.Tuple[str, str]: # pragma: no cover
+    ) -> T.Tuple[str, str]:  # pragma: no cover
         """
         Prompt to select from multiple choice, and return the selected choice
         id and value. It remembers the recent choice and use it as the default

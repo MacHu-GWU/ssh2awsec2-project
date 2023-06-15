@@ -1,21 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from ..config import Config, path_config
-from ..paths import dir_pem_files
-
-
-def info():
-    """
-    Show config related information.
-    """
-    path = dir_pem_files.joinpath(
-        "${AWS_ACCOUNT_ID_OR_ALIAS}",
-        "${AWS_REGION}",
-        "${KEY_NAME}.pem",
-    )
-
-    print(f"edit config file at: {path_config}")
-    print(f"store your ec2 key pem files at: {path}")
+from ..config import Config
+from ..logger import logger
 
 
 class SubCommandConfig:
@@ -35,13 +21,36 @@ class SubCommandConfig:
         Set AWS profile.
         """
         config = Config.read()
-        config.aws_profile = profile
+        if profile.lower() in ["default", "none", "null"]:
+            config.aws_profile = None
+            logger.info("set AWS profile to: default")
+        else:
+            config.aws_profile = profile
+            logger.info(f"set AWS profile to: {profile}")
+
         config.write()
 
+    @logger.start_and_end(
+        msg="set AWS region for ssh2awsec2 CLI",
+    )
     def set_region(self, region: str):
         """
         Set AWS region.
         """
         config = Config.read()
         config.aws_region = region
+        logger.info(f"set AWS region to: {region}")
+        config.write()
+
+    @logger.start_and_end(
+        msg="set cache expire",
+    )
+    def set_cache_expire(self, expire: int):
+        """
+        Set Cache expire time.
+        """
+        config = Config.read()
+        config.recent_cache_expire = expire
+        config.ssh_cmd_cache_expire = expire
+        logger.info(f"set cache expire: {expire} seconds")
         config.write()
