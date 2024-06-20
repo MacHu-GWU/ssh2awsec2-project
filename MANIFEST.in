@@ -8,3 +8,5 @@ include *.txt
 include *.rst
 exclude *.pyc
 exclude *.pyo
+exclude ssh2awsec2/docs/**
+exclude ssh2awsec2/tests/**
