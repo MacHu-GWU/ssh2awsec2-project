@@ -210,17 +210,7 @@ def ssh(
     logger.info(f"✅ found pem file at: {path_pem_file}")
 
     # find OS username
-    image = Image.from_id(ec2_client, image_id=ec2_inst.image_id)
-    logger.info(
-        f"Try to find OS username based on the "
-        f"AMI id = {image.id}, name = {image.name}"
-    )
-    try:
-        os_type = image.os_type
-        users = os_type.users
-        logger.info(f"✅ found os type {os_type.value} and potential usernames: {users}")
-    except CannotDetectOSTypeError:
-        logger.info(f"cannot automatically detect OS username")
+    def prompt_to_select_users() -> T.List[str]:
         list_choices = ListChoices(
             key=f"OS-USERNAME-{ec2_inst.id}",
             expire=config.recent_cache_expire,
@@ -246,6 +236,25 @@ def ssh(
             merge_selected=False,
         )
         users = [choice]
+        return users
+
+    image = Image.from_id(ec2_client, image_id=ec2_inst.image_id)
+    if image is None:
+        users = prompt_to_select_users()
+    else:
+        logger.info(
+            f"Try to find OS username based on the "
+            f"AMI id = {image.id}, name = {image.name}"
+        )
+        try:
+            os_type = image.os_type
+            users = os_type.users
+            logger.info(
+                f"✅ found os type {os_type.value} and potential usernames: {users}"
+            )
+        except CannotDetectOSTypeError:
+            logger.info(f"cannot automatically detect OS username")
+            users = prompt_to_select_users()
 
     # run ssh command
     for user in users:
